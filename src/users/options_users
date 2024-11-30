@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+
+iste_des_utilisateur():
+    echo "liste des utilisateur "
+    cut -d: -f1 /etc/passwd
+
+
+add_un_utilisateur():
+    # ont prévient que l'utilisateur doit passe en root avec un sudo 
+    echo "pour ajoute un utilisateur il faudra passer en root en utilisant la commande sudo " 
+    exit=1
+
+read -p "Entrez le noms d'utilisateur : " 
+if id "$USERNAME" &> /dev/null ; then
+    echo " l'utilisateur $USERNAME exit deja " > &2
+    exit 1
+fi
+ # ont demande le mots de passe a l'utilisateur
+read -s -p " Entrez le mots de passe pour $USERNAME :" 
+
+#ont demande le goupe principal
+read -p " Veulliez entrez le groupe principale pour l'utilisateur $USERNAME :" 
+
+if 
+
+
+#ont doit pouvoir ajouter un utilisateur avec comme infos nom, MDP, groupe principal
+modif_sur_utilisateur():
+    echo "modifi les infos d'un utilisateur" 
+
+#ont doit pouvoir modifier tout les infos d'un utilisteur nom, MDP, groupe
+all_save_personnal_user( ):
+    echo " permet de sauvgardé complétement des dossier de tout les utilisateur "
+
+#doit save tout les dossier de tout les utilisateur vers un lieu de stokage externe ont pourra stocker ca dans /mnt/export
