@@ -13,7 +13,7 @@ function menu_gestion_users() {
   echo "                             "
   echo "  4.Quitter le Menu          "
   echo "                             "
-  echo -n "veulliez choisir une options : "
+  echo "veulliez choisir une options : "
 }
 
 while true; do

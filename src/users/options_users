@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-liste_des_utilisateur():
+liste_des_utilisateur(){
     echo "liste des utilisateur "
     cut -d: -f1 /etc/passwd
     echo ""
@@ -13,8 +13,8 @@ liste_des_utilisateur():
         echo "Choix invalide. Retour au menu principal..."
         source host-manager.sh
     fi
-
-add_un_utilisateur():
+}   
+add_un_utilisateur(){
     # ont prévient que l'utilisateur doit passe en root avec un sudo 
     #echo "pour ajoute un utilisateur il faudra passer en root en utilisant la commande sudo " 
 
@@ -60,12 +60,12 @@ add_un_utilisateur():
         echo "Choix invalide. Retour au menu principal..."
         source host-manager.sh
     fi
+}
 
 
 
 
-
-modif_username():
+modif_username(){
     read -p "Entrez le nom de l'utilisateur à modifier : " Username
 
     # ont vérifie si l'utilisateur existe et si il existe pas ont renvoie au menu utilisateur 
@@ -77,9 +77,9 @@ modif_username():
             usermod -l "$New_Username" "$Username"
             echo "Le nom de l'utilisateur a été changé en '$New_Username'."
     fi
+}
 
-
-modif_passwd():
+modif_passwd(){
     read -p "Entrez le nom de l'utilisateur à modifier : " Username
 
     # ont vérifie si l'utilisateur existe et si il existe pas ont renvoie au menu utilisateur 
@@ -93,8 +93,8 @@ modif_passwd():
         echo "Le mot de passe de l'utilisateur '$Username' a été changé."
         source sous_menu_modif_utilisateur
     fi      
-            
-modif_groupe_principal()
+           } 
+modif_groupe_principal(){
     echo "modifie le groupe principale d'un utilisateur" 
 
     read -p "Entrez le nom de l'utilisateur à modifier : " Username
@@ -119,6 +119,7 @@ modif_groupe_principal()
             fi
         fi
     fi
+}
 
 
 
@@ -128,40 +129,8 @@ modif_groupe_principal()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-all_save_personnal_user( ):
+all_save_personnal_user( ){
     echo " permet de sauvgardé complétement des dossier de tout les utilisateur "
 
 #doit save tout les dossier de tout les utilisateur vers un lieu de stokage externe ont pourra stocker ca dans /mnt/export
+}

@@ -17,7 +17,7 @@ function menu_principal() {
   echo "                             "
   echo "  6.Quitter le Menu          "
   echo "                             "
-  echo -n "veulliez choisir une options : "
+  echo "veulliez choisir une options : "
 }
 
 while true; do
