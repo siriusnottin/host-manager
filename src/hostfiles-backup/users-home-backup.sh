@@ -10,10 +10,8 @@ function get_human_users {
   awk -F: '($3>=1000)&&($1!="nobody"){print $1}' /etc/passwd
 }
 
-human_users=$(get_human_users)
-
 # Backup all users home directories
-for user in $human_users; do
+for user in $(get_human_users); do
   echo "Backing up $user home directory..."
   sudo cp -r /home/$user /mnt/export/$user
 done
