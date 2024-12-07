@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 function sous_menu_logiciels() {
     clear
     echo " "
@@ -14,6 +15,7 @@ function sous_menu_logiciels() {
     echo " "
     echo "veulliez choisir une options : "
 }   
+
 while true; do
     menu_principal
     read -r choix

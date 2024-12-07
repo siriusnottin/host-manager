@@ -39,7 +39,7 @@ while true; do
     echo "Vous avez choisi de Quitter le Menu "
     exit 0
     ;;
-  
+
   *)
     echo " options invalide , veulliez réessayer."
     exit 0
