@@ -26,6 +26,8 @@ hostmanager [command]
 - `users`: Manage system users
 - `software`: Manage installed software
 - `network`: Manage network settings
+  - `display-network-interfaces-infos`: Display network interfaces information
+  - `configure-network-settings`: Configure network settings
 - `backup`: Backup personal files
 - `crontab`: Manage crontab tasks
 - `help`: Display help message
@@ -62,6 +64,8 @@ hostmanager [command]
   - Gateway
   - DNS
   - DHCP
+
+#### Display network interfaces information
 
 ### Backup of personal files
 
