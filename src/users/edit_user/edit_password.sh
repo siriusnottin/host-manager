@@ -14,10 +14,10 @@ if ! id "$USERNAME" &>/dev/null; then
   3) source "$SCRIPT_PATH/host_manager.sh" ;;
   esac
 else
-  read -sp "Entrez le nouveau mot de passe : " PASSWD
+  read -sp "Entrez le nouveau mot de passe : " PASSWORD
   echo ""
 
-  echo "$USERNAME:$PASSWD" | chpasswd
+  echo "$USERNAME:$PASSWORD" | chpasswd
   \  && echo "Le mot de passe de l'utilisateur '$USERNAME' a été changé."
   \  || echo "Une erreur s'est produite lors du changement du mot de passe de l'utilisateur '$USERNAME'." && exit 1
 fi

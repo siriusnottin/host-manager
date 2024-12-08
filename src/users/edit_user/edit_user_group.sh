@@ -22,7 +22,7 @@ else
     options=("Créer le groupe" "Revenir au menu principal")
     display_menu "Que voulez-vous faire ?" "${options[@]}"
     case $REPLY in
-    1) groupadd "$NEW_GROUP" ;;
+    1) sudo groupadd "$NEW_GROUP" ;;
     2) source "$SCRIPT_PATH/host_manager.sh" ;;
     esac
   fi

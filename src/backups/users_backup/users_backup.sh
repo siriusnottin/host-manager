@@ -15,13 +15,13 @@ fi
 # check if the backup directory exists
 if [ ! -d "$BACKUP_DIR" ]; then
   echo "The backup directory $BACKUP_DIR does not exist."
-  options=("Create the directory" "Try again" "Edit the backup directory path" "Cancel")
+  options=("Create the directory" "Try again" "Edit the backup directory path" "Revenir au menu principal")
   display_menu "What do you want to do?" "${options[@]}"
   case $REPLY in
-  1) mkdir -p "$BACKUP_DIR" ;;
+  1) sudo mkdir -p "$BACKUP_DIR" ;;
   2) source "$SCRIPT_PATH/src/backups/users_backup/users_backup.sh" ;;
   3) source "$SCRIPT_PATH/src/backups/users_backup/users_backup.sh" ;;
-  4) exit ;;
+  4) source "$SCRIPT_PATH/host_manager.sh" ;;
   esac
 fi
 
@@ -35,5 +35,5 @@ for user in $(get_human_users); do
   echo "Renaming the backup file..."
   sudo mv "$BACKUP_DIR/$user.tar.gz" "$BACKUP_DIR/$user.tar.gz.$(date +%Y%m%d)" && echo "Backup of $user home directory done."
   sleep 1
-  exit
+  source "$SCRIPT_PATH/host_manager.sh"
 done

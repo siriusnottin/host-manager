@@ -2,6 +2,7 @@
 
 source "$SCRIPT_PATH/src/utils/display_menu.sh"
 
+clear
 edit_user_menu() {
   options=("Modifier le nom d'utilisateur" "Modifier le mot de passe" "Modifier le groupe principal" "Retour au menu utilisateur" "Retour au menu principal")
   display_menu "Modifier l'utilisateur : $USERNAME" "${options[@]}"

@@ -18,13 +18,13 @@ list_user_crontab() {
   read -p "Enter the username to list the crontab: " username
   echo "$username's crontab:"
   echo ""
-  crontab -u "$username" -l
+  sudo crontab -u "$username" -l
   echo ""
 
   options=("Edit crontab" "Back to crontab management menu")
   display_menu "What do you want to do next?" "${options[@]}"
   case $REPLY in
-  1) crontab -u "$username" -e ;;
+  1) sudo crontab -u "$username" -e ;;
   2) return ;;
   esac
 }
@@ -33,7 +33,7 @@ edit_user_crontab() {
   read -p "Enter the username to edit the crontab: " username
 
   echo "Editing $username's crontab..."
-  crontab -u "$username" -e
+  sudo crontab -u "$username" -e
   if [ $? -eq 0 ]; then
     echo "Crontab for $username edited successfully."
     echo "Returning to crontab management menu..."

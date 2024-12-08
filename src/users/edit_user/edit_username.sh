@@ -14,5 +14,5 @@ else
   read -p "Nouveau nom d'utilisateur : " USERNAME_NEW
   usermod -lm "$USERNAME_NEW" "$USERNAME"
   \  && echo "Le nom de l'utilisateur a été changé en '$USERNAME_NEW'."
-  \  || echo "Une erreur s'est produite lors du changement du nom de l'utilisateur."
+  \  || echo "Une erreur s'est produite lors du changement du nom de l'utilisateur." && exit 1
 fi

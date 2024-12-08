@@ -32,7 +32,6 @@ edit_network_interface() {
     2)
       read -p "Enter the gateway: " GATEWAY
       sudo ip route add default via $GATEWAY
-
       ;;
     3)
       read -p "Enter the DNS: " DNS
