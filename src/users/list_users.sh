@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 
-liste_des_utilisateur() {
-  echo "liste des utilisateur "
-  cut -d: -f1 /etc/passwd
-  echo ""
-  echo "pour retournéee au menu "gestion des utilisateur " entée 1 "
-  read choix
-  if [ "$choix" -eq 1 ]; then
-    source users-menu.sh
-  else
-    echo "Choix invalide. Retour au menu principal..."
-    source host-manager.sh
-  fi
-}
+echo ""
+echo "Liste des utilisateurs :"
+awk -F: '$3 >= 1000 && $3 != 65534 {print $1}' /etc/passwd
+
+source "$SCRIPT_PATH/src/utils/display_menu.sh"
+
+options=("Modifier un utilisateur" "Revenir au menu principal")
+display_menu "Que voulez-vous faire ?" "${options[@]}"
+case $REPLY in
+1) source $SCRIPT_PATH/src/users/edit_user/edit_user_menu.sh ;;
+2) clear && source $SCRIPT_PATH/host_manager.sh ;;
+esac

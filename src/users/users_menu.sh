@@ -1,17 +1,15 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR=$(dirname "$0")
+source "$SCRIPT_PATH/src/utils/display_menu.sh"
 
-# Users management menu
-
+clear
 while true; do
-  options=("List system users" "Add a user" "Edit a user" "Back to main menu")
-  display_menu "Users Management" "${options[@]}"
+  options=("Lister les utilisateurs du système" "Ajouter un nouvel utilisateur" "Modifier un utilisateur" "Revenir au menu principal")
+  display_menu "Gestion des utilisateurs" "${options[@]}"
   case $REPLY in
-  1) echo "List system users selected" ;; # Add logic to list users
-  2) echo "Add a user selected" ;;        # Add logic to add a user
-  3) echo "Edit a user selected" ;;       # Add logic to edit a user
-  4) break ;;
-  *) echo "Invalid option. Try another one." ;;
+  1) source "$SCRIPT_PATH/src/users/list_users.sh" ;;
+  2) source "$SCRIPT_PATH/src/users/create_user.sh" ;;
+  3) source "$SCRIPT_PATH/src/users/edit_user/edit_user_menu.sh" ;;
+  *) echo "Option invalide, veuillez réessayer." ;;
   esac
 done

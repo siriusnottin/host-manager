@@ -1,17 +1,16 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR=$(dirname "$0")
+source "$SCRIPT_PATH/src/utils/display_menu.sh"
 
-# Software management menu
-
+clear
 while true; do
-  options=("List installed software" "Install a software" "Remove a software" "Back to main menu")
-  display_menu "Software Management" "${options[@]}"
+  options=("Lister les logiciels installés" "Installer un logiciel" "Désinstaller un logiciel" "Revenir au menu principal")
+  display_menu "Gestion des logiciels" "${options[@]}"
   case $REPLY in
-  1) echo "List installed software selected" ;; # Add logic to list software
-  2) echo "Install a software selected" ;;      # Add logic to install software
-  3) echo "Remove a software selected" ;;       # Add logic to remove software
-  4) break ;;
-  *) echo "Invalid option. Try another one." ;;
+  1) source "$SCRIPT_PATH/src/software/list_softwares.sh" ;;
+  2) source "$SCRIPT_PATH/src/software/install_software.sh" ;;
+  3) source "$SCRIPT_PATH/src/software/remove_software.sh" ;;
+  4) source "$SCRIPT_PATH/host_manager.sh" ;;
+  *) echo "Option invalide, veuillez réessayer." ;;
   esac
 done

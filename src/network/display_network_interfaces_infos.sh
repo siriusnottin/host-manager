@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # Display network interfaces informations
-
 for interface in $(ls /sys/class/net/); do
   echo "Interface: $interface"
   ip addr show $interface | grep "inet\b" | awk '{print "IP Address: " $2}'
