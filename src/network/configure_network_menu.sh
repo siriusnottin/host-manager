@@ -12,40 +12,40 @@ select_network_interface() {
   for interface in "${interfaces[@]}"; do
     options+=("$interface")
   done
-  display_menu "Select a network interface" "${options[@]}"
+  display_menu "Sélectionnez une interface réseau" "${options[@]}"
   INTERFACE=${interfaces[$REPLY - 1]}
 }
 
 edit_network_interface() {
   select_network_interface
   while true; do
-    options=("Edit IP address" "Edit gateway" "Edit DNS" "Back to network management menu" "Back to main menu")
-    display_menu "Edit network interface $INTERFACE" "${options[@]}"
+    options=("Modifier l'adresse IP" "Modifier la passerelle" "Modifier le DNS" "Retour au menu de gestion du réseau" "Retour au menu principal")
+    display_menu "Modifier l'interface réseau $INTERFACE" "${options[@]}"
     case $REPLY in
     1)
-      read -p "Enter the IP address: " IP_ADDRESS
-      read -p "Enter the subnet mask (default 24): " SUBNET_MASK
+      read -p "Entrez l'adresse IP : " IP_ADDRESS
+      read -p "Entrez le masque de sous-réseau (par défaut 24) : " SUBNET_MASK
 
-      SUBNET_MASK=${SUBNET_MASK:-24} # set default for subnet mask
+      SUBNET_MASK=${SUBNET_MASK:-24} # définir la valeur par défaut pour le masque de sous-réseau
       sudo ip addr add $IP_ADDRESS/$SUBNET_MASK dev $INTERFACE
       ;;
     2)
-      read -p "Enter the gateway: " GATEWAY
+      read -p "Entrez la passerelle : " GATEWAY
       sudo ip route add default via $GATEWAY
       ;;
     3)
-      read -p "Enter the DNS: " DNS
+      read -p "Entrez le DNS : " DNS
       echo "nameserver $DNS" | sudo tee /etc/resolv.conf >/dev/null
       ;;
     4) exit ;;
     5) source "$SCRIPT_PATH/host_manager.sh" ;;
-    *) echo "Invalid option. Try another one." ;;
+    *) echo "Option invalide. Essayez-en une autre." ;;
     esac
   done
 }
 
 reboot_system() {
-  read -p "Do you want to reboot the system now? (y/N) " REBOOT
+  read -p "Voulez-vous redémarrer le système maintenant ? (y/N) " REBOOT
   if [ "$REBOOT" == "y" ]; then
     sudo reboot
   fi
