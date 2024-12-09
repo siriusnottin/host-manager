@@ -7,8 +7,6 @@ echo "Entrez l'URL source du logiciel à installer (laissez vide pour une instal
 read source_url
 
 if [ -f /etc/os-release ]; then
-    # Identifier la distribution sur la quelle ont est
-    ./etc/os-release
     if [ -z "$source_url" ]; then
         # Installation depuis un dépôt
         case $ID in
@@ -31,46 +29,53 @@ if [ -f /etc/os-release ]; then
         esac
     else
 
+        filename=$(basename "$source_url")
+        file_path="$HOME/$filename"
+
+        # download source
+        echo "Téléchargement du logiciel depuis $source_url..."
+        wget -q --show-progress "$source_url" -O "$file_path" || curl -sSL "$source_url" -o "$file_path"
+
         # Vérification de l'existence du fichier
-        if [[ ! -f $source_url ]]; then
-            echo "Erreur : Le fichier $source_url n'existe pas."
+        if [[ ! -f $file_path ]]; then
+            echo "Erreur : Le fichier $filename n'existe pas."
             exit 1
-        fi  
+        fi
 
-           case $file_path in
-            *.deb)
-                echo "Installation d'un fichier .deb..."
-                sudo apt install -y "$file_path" || sudo dpkg -i "$file_path"
-                sudo apt --fix-broken install -y # Résolution des dépendances si nécessaire
-                ;;
-            *.rpm)
-                echo "Installation d'un fichier .rpm..."
-                if command -v dnf &>/dev/null; then
-                    sudo dnf install -y "$file_path"
-                elif command -v rpm &>/dev/null; then
-                    sudo rpm -ivh "$file_path"
-                else
-                    echo "Aucun gestionnaire RPM (dnf/rpm) trouvé."
-                    exit 1
-                fi
-                ;;
-            *.sh)
-                echo "Installation depuis un script bash..."
-                chmod +x "$file_path"
-                sudo "$file_path"
-                ;;
-            *)
-                echo "Type de fichier non pris en charge ou inconnu."
-                ;;
-            esac
+        case $filename in
+        *.deb)
+            echo "Installation d'un fichier .deb..."
+            sudo apt install -y "$file_path" || sudo dpkg -i "$file_path"
+            sudo apt --fix-broken install -y # Résolution des dépendances si nécessaire
+            ;;
+        *.rpm)
+            echo "Installation d'un fichier .rpm..."
+            if command -v dnf &>/dev/null; then
+                sudo dnf install -y "$file_path"
+            elif command -v rpm &>/dev/null; then
+                sudo rpm -ivh "$file_path"
+            else
+                echo "Aucun gestionnaire RPM (dnf/rpm) trouvé."
+                exit 1
+            fi
+            ;;
+        *.sh)
+            echo "Installation depuis un script bash..."
+            chmod +x "$file_path"
+            sudo "$file_path"
+            ;;
+        *)
+            echo "Type de fichier non pris en charge ou inconnu."
+            exit 1
+            ;;
+        esac
 
-        # Nettoyage
-        cd ..
-        rm -rf "$dossier" "$fichier"
+        # Clean up
+        rm -rf "$file_path"
 
         echo "Installation de $logiciel terminée."
 
-        echo "Retourner au menu principal..."
+        echo "Retour au menu principal..."
         sleep 1
         source $SCRIPT_PATH/host_manager.sh
     fi
