@@ -30,32 +30,39 @@ if [ -f /etc/os-release ]; then
             ;;
         esac
     else
-        # Installation à partir d'un fichier source
-        echo "Téléchargement et installation de $logiciel depuis la source : $source_url"
-        fichier=$(basename "$source_url")
-        dossier=$(basename "$fichier" .tar.gz) #TODO: ??
 
-        # Télécharger la source
-        wget "$source_url" -O "$fichier" || {
-            echo "Échec du téléchargement."
-            return 1
-        }
+        # Vérification de l'existence du fichier
+        if [[ ! -f $source_url ]]; then
+            echo "Erreur : Le fichier $source_url n'existe pas."
+            exit 1
+        fi  
 
-        # Extraire le fichier
-        tar -xzf "$fichier" || {
-            echo "Échec de l'extraction."
-            return 1
-        }
-
-        # Compilation et installation
-        cd "$dossier" || {
-            echo "Impossible d'accéder au dossier des sources."
-            return 1
-        }
-        ./configure && make && sudo make install || {
-            echo "Échec de la compilation ou de l'installation."
-            return 1
-        }
+           case $file_path in
+            *.deb)
+                echo "Installation d'un fichier .deb..."
+                sudo apt install -y "$file_path" || sudo dpkg -i "$file_path"
+                sudo apt --fix-broken install -y # Résolution des dépendances si nécessaire
+                ;;
+            *.rpm)
+                echo "Installation d'un fichier .rpm..."
+                if command -v dnf &>/dev/null; then
+                    sudo dnf install -y "$file_path"
+                elif command -v rpm &>/dev/null; then
+                    sudo rpm -ivh "$file_path"
+                else
+                    echo "Aucun gestionnaire RPM (dnf/rpm) trouvé."
+                    exit 1
+                fi
+                ;;
+            *.sh)
+                echo "Installation depuis un script bash..."
+                chmod +x "$file_path"
+                sudo "$file_path"
+                ;;
+            *)
+                echo "Type de fichier non pris en charge ou inconnu."
+                ;;
+            esac
 
         # Nettoyage
         cd ..
