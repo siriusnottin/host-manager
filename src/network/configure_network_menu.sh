@@ -17,12 +17,14 @@ select_network_interface() {
 }
 
 edit_network_interface() {
+  clear
   select_network_interface
   while true; do
     options=("Modifier l'adresse IP" "Modifier la passerelle" "Modifier le DNS" "Retour au menu de gestion du réseau" "Retour au menu principal")
     display_menu "Modifier l'interface réseau $INTERFACE" "${options[@]}"
     case $REPLY in
     1)
+      clear
       read -p "Entrez l'adresse IP : " IP_ADDRESS
       read -p "Entrez le masque de sous-réseau (par défaut 24) : " SUBNET_MASK
 
@@ -30,10 +32,12 @@ edit_network_interface() {
       sudo ip addr add $IP_ADDRESS/$SUBNET_MASK dev $INTERFACE
       ;;
     2)
+      clear
       read -p "Entrez la passerelle : " GATEWAY
       sudo ip route add default via $GATEWAY
       ;;
     3)
+      clear
       read -p "Entrez le DNS : " DNS
       echo "nameserver $DNS" | sudo tee /etc/resolv.conf >/dev/null
       ;;

@@ -1,6 +1,7 @@
-#!/usr/bin/env bash
+la#!/usr/bin/env bash
 
 supprimer_logiciel() {
+    clear
     echo "Veuillez entrer le nom du logiciel que vous souhaitez supprimer :"
     read -r logiciel
 
@@ -25,6 +26,7 @@ supprimer_logiciel() {
     fi
 
     if [ -f /etc/os-release ]; then
+        clear
 # Identifier la distribution
         . /etc/os-release
 
@@ -48,10 +50,12 @@ supprimer_logiciel() {
                 ;;
         esac
     else
+        clear
         echo "Impossible de détecter le système d'exploitation."
         source sous_menu
     fi
 
+    clear
     echo "Le logiciel $logiciel a été supprimé avec succès."
 
     echo "pour retournéee au menu "gestion des logiciel " entée 1 "

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+clear
 
 source "$SCRIPT_PATH/src/utils/display_menu.sh"
 
@@ -14,6 +15,7 @@ if ! id "$USERNAME" &>/dev/null; then
   3) source "$SCRIPT_PATH/host_manager.sh" ;;
   esac
 else
+  clear
   read -sp "Entrez le nouveau mot de passe : " PASSWORD
   echo ""
 

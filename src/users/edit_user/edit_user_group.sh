@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+clear
 
 source "$SCRIPT_PATH/src/utils/display_menu.sh"
 
@@ -16,6 +17,7 @@ if ! id "$USERNAME" &>/dev/null; then
   3) source "$SCRIPT_PATH/host_manager.sh" ;;
   esac
 else
+  clear
   read -p "Entrez le nouveau groupe principal : " NEW_GROUP
   if ! getent group "$NEW_GROUP" &>/dev/null; then
     echo "Le groupe '$NEW_GROUP' n'existe pas."

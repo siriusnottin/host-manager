@@ -16,7 +16,7 @@ main_menu() {
     3) source "$SCRIPT_PATH/src/network/network_menu.sh" ;;
     4) source "$SCRIPT_PATH/src/backups/users_backup/users_backup_menu.sh" ;;
     5) source "$SCRIPT_PATH/src/crontabs/crontabs_menu.sh" ;;
-    6) echo "Aide sélectionnée" ;; # Add help logic here
+    6) source "$SCRIPT_PATH/src/help/help_menu.sh" ;;
     *) echo "Option invalide, veuillez réessayer." ;;
     esac
   done

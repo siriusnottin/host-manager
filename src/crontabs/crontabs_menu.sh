@@ -43,13 +43,15 @@ edit_user_crontab() {
 }
 
 while true; do
-  options=("List current user's crontab" "List a specific user's crontab" "Edit a user's crontab" "Back to main menu")
-  display_menu "Crontab Management" "${options[@]}"
+  clear
+  options=("Lister les crontabs de l'utilisateur courant" "Lister les crontabs d'un utilisateur spécifique" "Éditer les crontabs d'un utilisateur" "Afficher l'aide" "Revenir au menu principal")
+  display_menu "Gestion des crontabs" "${options[@]}"
   case $REPLY in
   1) list_current_user_crontab ;;
   2) list_user_crontab ;;
   3) edit_user_crontab ;;
-  4) break ;;
-  *) echo "Invalid option, please try again." ;;
+  4) source "$SCRIPT_PATH/src/help/crontabs_help.sh" ;;
+  5) source "$SCRIPT_PATH/host_manager.sh" ;;
+  *) echo "Option invalide, veuillez réessayer." ;;
   esac
 done

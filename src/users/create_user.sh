@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+clear
 read -p "Entrez le nom d'utilisateur : " USERNAME
 if id "$USERNAME" &>/dev/null; then
   echo "L'utilisateur $USERNAME existe déjà."
@@ -11,6 +11,7 @@ if id "$USERNAME" &>/dev/null; then
   esac
 fi
 
+clear
 # Demander le mot de passe à l'utilisateur
 read -sp "Mot de passe pour $USERNAME : " PASSWORD
 echo ""
@@ -67,6 +68,7 @@ if ! id "$USERNAME" &>/dev/null; then
   esac
 fi
 
+clear
 echo "L'utilisateur $USERNAME a été créé avec succès."
 echo ""
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+clear
 echo "liste des logiciel "
 if [ -f /etc/os-release ]; then
     # Identifier la distribution
@@ -24,6 +24,7 @@ if [ -f /etc/os-release ]; then
         ;;
     esac
 else
+    clear
     echo "pas de logiciel installer sur la machine"
     echo ""
     echo "pour retournéee au menu "sous_menu_logiciel " entée 1 "
