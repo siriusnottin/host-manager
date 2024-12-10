@@ -3,7 +3,7 @@
 source "$SCRIPT_PATH/src/utils/display_menu.sh"
 
 clear
-edit_user_menu() {
+while true; do
   options=("Modifier le nom d'utilisateur" "Modifier le mot de passe" "Modifier le groupe principal" "Retour au menu utilisateur" "Retour au menu principal")
   display_menu "Modifier l'utilisateur : $USERNAME" "${options[@]}"
   case $REPLY in
@@ -13,4 +13,4 @@ edit_user_menu() {
   4) source $SCRIPT_PATH/src/users/users_menu.sh ;;
   5) source $SCRIPT_PATH/host_manager.sh ;;
   esac
-}
+done
